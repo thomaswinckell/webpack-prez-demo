@@ -1,0 +1,1 @@
+/** @see https://github.com/Stanko/react-redux-webpack2-boilerplate/blob/master/webpack.config.js **/
