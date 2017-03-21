@@ -112,12 +112,36 @@ if (isProduction) {
 
     // Production rules
     rules.push( {
-            test: /\.scss$/,
-            // TODO : test that...
-            use: [ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: 'css-loader!postcss-loader!sass-loader',
-            })],
+            test: /\.s?css$/,
+            use : [ {
+                loader : "style-loader"
+            }, {
+                loader : "css-loader",
+                options : {
+                    sourceMap : true
+                }
+            }, {
+                loader : "postcss-loader",
+                options : {
+                    sourceMap : true,
+                    sourceComments : true,
+                    plugins: function () {
+                        return [
+                            require('autoprefixer')({
+                                browsers: [
+                                    'last 3 version',
+                                    'ie >= 10',
+                                ],
+                            })
+                        ];
+                    }
+                }
+            }, {
+                loader  : "sass-loader",
+                options : {
+                    sourceMap : true
+                }
+            }]
         }
     );
 } else {

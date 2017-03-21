@@ -1,0 +1,31 @@
+.responsive-image__wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.responsive-image__placeholder {
+    //transition: opacity 300ms linear;
+    position: relative;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+
+    /*&.loaded {
+        opacity: 0;
+    }*/
+}
+
+.responsive-image {
+    transition: opacity 300ms linear;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+
+    &.loaded {
+        opacity: 1;
+    }
+}

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
-import IntlApp from "../shared/components/IntlApp";
-import Spinner from "../shared/components/Spinner";
+import IntlApp from "../components/IntlApp";
+import Spinner from "../components/Spinner";
 
 
 
@@ -29,13 +29,13 @@ function resolveWithSpinner(componentPromise) {
 
 const frontApp = new Promise(resolve => {
     require.ensure([], function (require) {
-        resolve(require('../front/core/Routes.jsx').default)
+        resolve(require('../front/Routes.jsx').default)
     });
 });
 
 const adminApp = new Promise(resolve => {
     require.ensure([], function (require) {
-        resolve(require('../admin/core/Routes.jsx').default)
+        resolve(require('../admin/Routes.jsx').default)
     });
 });
 

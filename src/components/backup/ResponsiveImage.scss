@@ -1,0 +1,37 @@
+.responsive-image__wrapper {
+    position: relative;
+
+    canvas {
+        height : 100%;
+    }
+}
+
+.responsive-image__placeholder {
+    //transition: opacity 3000ms ease-out;
+    position: relative;
+    opacity: 1;
+    height: 100%;
+    //filter: blur(5px);
+    //transform: scale(1.02);
+
+    &.loaded {
+        opacity: 0;
+    }
+}
+
+.responsive-image {
+    //transition: opacity 3000ms ease-in;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    //transition: filter 3000ms, transform 3000ms;
+    //filter: blur(5px);
+    //transform: scale(1.02);
+
+    &.loaded {
+        //transform: scale(1);
+        //filter: blur(0px);
+        opacity: 1;
+    }
+}
