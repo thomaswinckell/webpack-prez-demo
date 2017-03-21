@@ -16,7 +16,7 @@ export default class ResponsiveImage extends React.Component {
         }
     }
 
-    renderImage(srcset) {
+    renderImage() {
         if(!this.state.showImage) {
             return null;
         }
@@ -24,44 +24,21 @@ export default class ResponsiveImage extends React.Component {
             <img
                 ref={ c => { this.image = c } }
                 src={this.props.image}
-                srcSet={srcset}
+                srcSet={this.props.responsiveImage.srcset}
                 className={classNames("responsive-image", { loaded : this.state.loaded })}
                 onLoad={() => this.setState({loaded:true})}/>
         )
     }
 
     render() {
-        // FIX resize-image-loader...
-        const responsiveImage = JSON.parse(this.props.responsiveImage.toString());
-
         const { loaded } = this.state;
 
         return(
             <div style={this.props.style} className={ classNames("responsive-image__wrapper", { loaded }, this.props.className) }>
-                <img src={responsiveImage.placeholder}
+                <img src={this.props.responsiveImage.placeholder}
                     className={classNames("responsive-image__placeholder", { loaded })} />
-                { this.renderImage(responsiveImage.srcset) }
+                { this.renderImage() }
             </div>
         )
     }
-
-    /*render() {
-        // TODO :refactor
-        return(
-            <div style={{position:'relative'}}>
-                <img
-                    src={this.props.responsiveImage.placeholder}
-                    style={{ opacity:(this.state.loaded ? 0 : 1),
-                             transition: 'opacity 300ms ease-out',
-                             position:'absolute'}} />
-                <img
-                    src={this.props.image}
-                    srcSet={this.props.responsiveImage.srcset}
-                    style={{ opacity:(this.state.loaded ? 1 : 0),
-                             transition: 'opacity 300ms ease-in',
-                             position:'absolute'}}
-                    onLoad={() => this.setState({loaded:true})} />
-            </div>
-        )
-    }*/
 }
