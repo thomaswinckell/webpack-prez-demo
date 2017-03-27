@@ -27,15 +27,15 @@ function resolveWithSpinner(componentPromise) {
 }
 
 
-const frontApp = new Promise(resolve => {
+const publicApp = new Promise(resolve => {
     require.ensure([], function (require) {
-        resolve(require('../front/Routes.jsx').default)
+        resolve(require('../public/Routes.jsx').default)
     });
 });
 
-const adminApp = new Promise(resolve => {
+const securedApp = new Promise(resolve => {
     require.ensure([], function (require) {
-        resolve(require('../admin/Routes.jsx').default)
+        resolve(require('../secured/Routes.jsx').default)
     });
 });
 
@@ -44,9 +44,9 @@ export default () => (
     <IntlApp>
         <Router>
                 <Switch>
-                    <Route component={resolveWithSpinner(frontApp)} path="/front"/>
-                    <Route component={resolveWithSpinner(adminApp)} path="/admin"/>
-                    <Redirect to="/front/home" />
+                    <Route component={resolveWithSpinner(publicApp)} path="/public"/>
+                    <Route component={resolveWithSpinner(securedApp)} path="/secured"/>
+                    <Redirect to="/public/home" />
                 </Switch>
         </Router>
     </IntlApp>

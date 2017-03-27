@@ -11,11 +11,11 @@ import Login from './page/Login';
 export default () => (
     <App>
         <Switch>
-            <Route path="/front/home" component={Home}/>
-            <Route path="/front/about" component={About}/>
-            <Route path="/front/huge" component={Huge}/>
-            <Route path="/front/login" component={Login}/>
-            <Redirect to="/front/home"/>
+            <Route path="/public/home" component={Home}/>
+            <Route path="/public/about" component={About}/>
+            <Route path="/public/huge" component={Huge}/>
+            <Route path="/public/login" component={Login}/>
+            <Redirect to="/public/home"/>
         </Switch>
     </App>
 )

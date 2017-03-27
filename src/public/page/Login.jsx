@@ -24,7 +24,7 @@ export default () => (
             </div>
 
             <Link className="btn btn-lg btn-primary btn-block"
-                  type="submit" to="/admin/home">
+                  type="submit" to="/secured/home">
                 Sign in
             </Link>
 

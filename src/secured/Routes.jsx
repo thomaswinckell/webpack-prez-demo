@@ -9,8 +9,8 @@ import About from "./page/About";
 export default () => (
     <App>
         <Switch>
-            <Route path="/admin/home" component={Home}/>
-            <Route path="/admin/about" component={About}/>
+            <Route path="/secured/home" component={Home}/>
+            <Route path="/secured/about" component={About}/>
             <Redirect to="home"/>
         </Switch>
     </App>

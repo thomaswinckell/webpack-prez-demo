@@ -12,7 +12,7 @@ export default class NavigationBar extends React.Component {
                     <span className="navbar-toggler-icon"/>
                 </button>
 
-                <a className="navbar-brand" href="#">Admin</a>
+                <a className="navbar-brand" href="#">Secured</a>
 
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav mr-auto">
@@ -27,7 +27,7 @@ export default class NavigationBar extends React.Component {
                             </Link>
                         </li>
                     </ul>
-                    <Link className="btn btn-success" to="/front" role="button">
+                    <Link className="btn btn-success" to="/public" role="button">
                         Logout
                     </Link>
                 </div>
