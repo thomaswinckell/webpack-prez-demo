@@ -44,6 +44,7 @@ const rules = [
         use: [{
             loader  : 'babel-loader',
             options : {
+                plugins: ['transform-decorators-legacy' ],
                 presets : ["es2015", "stage-0", "react"]
             }
         }],
@@ -56,6 +57,7 @@ const rules = [
     },
     {
         test:   /\.(png|jpg|jpeg|gif|bmp)$/,
+        exclude: function(path) { console.log(path); return false; },
         use: [{
             loader : "file-loader",
             options : {

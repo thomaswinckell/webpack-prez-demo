@@ -1,5 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
+import { autobind } from "core-decorators";
 
 import "./ResponsiveImage.scss";
 
@@ -16,17 +17,27 @@ export default class ResponsiveImage extends React.Component {
         }
     }
 
+    @autobind
+    loaded() {
+        this.setState({ loaded : true }, this.props.afterLoad && this.props.afterLoad());
+    }
+
     renderImage() {
         if(!this.state.showImage) {
             return null;
         }
+
+        const firstSrcIndex =  Object.keys(this.props.sources)[0];
+        const src = this.props.sources[this.props.defaultSize] || this.props.sources[this.props.defaultSize + "w"] || this.props.sources[firstSrcIndex];
+
         return (
             <img
                 ref={ c => { this.image = c } }
-                src={this.props.image}
-                srcSet={this.props.responsiveImage.srcset}
+                src={src}
+                sizes={this.props.sizes}
+                srcSet={this.props.srcset}
                 className={classNames("responsive-image", { loaded : this.state.loaded })}
-                onLoad={() => this.setState({loaded:true})}/>
+                onLoad={this.loaded}/>
         )
     }
 
@@ -34,9 +45,9 @@ export default class ResponsiveImage extends React.Component {
         const { loaded } = this.state;
 
         return(
-            <div style={this.props.style} className={ classNames("responsive-image__wrapper", { loaded }, this.props.className) }>
-                <img src={this.props.responsiveImage.placeholder}
-                    className={classNames("responsive-image__placeholder", { loaded })} />
+            <div className={ classNames("responsive-image__wrapper", { loaded }, this.props.className) }>
+                <img src={this.props.placeholder.url}
+                     className={classNames("responsive-image__placeholder", { loaded })} />
                 { this.renderImage() }
             </div>
         )
