@@ -9,23 +9,16 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
-const jsSourcePath = path.join(__dirname, './src');
 const buildPath = path.join(__dirname, './build');
 const sourcePath = path.join(__dirname, './src');
 
 // Common plugins
 const plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity,
-        filename: 'vendor-[hash].js',
-    }),
     new webpack.DefinePlugin({
         'process.env': {
             NODE_ENV: JSON.stringify(nodeEnv),
         },
     }),
-    new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
         template: path.join(sourcePath, 'index.html'),
         path: buildPath,
@@ -84,70 +77,84 @@ const rules = [
     },
 ];
 
+
 if (isProduction) {
+
     // Production plugins
     plugins.push(
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            minChunks: function(module){
+                return module.context && module.context.indexOf("node_modules") !== -1;
+            }
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "manifest",
+            minChunks: Infinity
+        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false,
         }),
         new webpack.optimize.UglifyJsPlugin({
+            debug: false,
+            minimize: true,
+            sourceMap: true,
             compress: {
                 warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true,
             },
             output: {
                 comments: false,
             },
         }),
-        new ExtractTextPlugin('style-[hash].css') // TODO : is this needed ?
+        new ExtractTextPlugin({
+            filename: 'css/style-[hash].css',
+            disable: false,
+            allChunks: true
+        })
     );
 
     // Production rules
     rules.push( {
             test: /\.s?css$/,
-            use : [ {
-                loader : "style-loader"
-            }, {
-                loader : "css-loader",
-                options : {
-                    sourceMap : true
-                }
-            }, {
-                loader : "postcss-loader",
-                options : {
-                    sourceMap : true,
-                    sourceComments : true,
-                    plugins: function () {
-                        return [
-                            require('autoprefixer')({
-                                browsers: [
-                                    'last 3 version',
-                                    'ie >= 10',
-                                ],
-                            })
-                        ];
+            use : ExtractTextPlugin.extract({
+                fallback : [{
+                    loader : "style-loader"
+                }],
+                use : [ {
+                    loader : "css-loader",
+                    options : {
+                        sourceMap : true
                     }
-                }
-            }, {
-                loader  : "sass-loader",
-                options : {
-                    sourceMap : true
-                }
-            }]
+                }, {
+                    loader : "postcss-loader",
+                    options : {
+                        sourceMap : true,
+                        sourceComments : false,
+                        plugins: function () {
+                            return [
+                                require('autoprefixer')({
+                                    browsers: [
+                                        'last 3 version',
+                                        'ie >= 10',
+                                    ],
+                                })
+                            ];
+                        }
+                    }
+                }, {
+                    loader  : "sass-loader",
+                    options : {
+                        sourceMap : true
+                    }
+                }]
+            })
         }
     );
 } else {
     // Development plugins
     plugins.push(
+        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new DashboardPlugin()
     );
@@ -188,24 +195,15 @@ if (isProduction) {
 }
 
 module.exports = {
-    devtool: isProduction ? 'eval' : 'source-map',
-    context: jsSourcePath,
+    devtool: isProduction ? 'source-map' : 'eval',
+    context: sourcePath,
     entry: {
-        js: './index.jsx'/*,
-        vendor: [
-            'babel-polyfill',
-            'es6-promise',
-            'react-dom',
-            'react-router',
-            'react',
-            'reflux',
-            'whatwg-fetch'
-        ],*/
+        app: './index.jsx'
     },
     output: {
         path: buildPath,
         publicPath: '/',
-        filename: '[name]-[hash].js',
+        filename: 'js/[name]-[hash].js',
     },
     module: {
         rules,
@@ -213,13 +211,13 @@ module.exports = {
     resolve: {
         extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
         modules: [
-            path.resolve(__dirname, 'node_modules'),
-            jsSourcePath,
+            'node_modules',
+            sourcePath,
         ],
     },
     plugins,
     devServer: {
-        contentBase: isProduction ? buildPath : jsSourcePath,
+        contentBase: isProduction ? buildPath : sourcePath,
         port: 3000,
         compress: isProduction,
         inline: !isProduction,

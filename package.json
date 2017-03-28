@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"No test for now...\" && exit 0",
     "start": "webpack-dashboard -t 'Dashboard' -- webpack-dev-server --colors --no-info",
-    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack -p",
+    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
     "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
     "lint": "eslint ./src ./webpack.config.js -f table --ext .js --ext .jsx || true",
     "preview": "NODE_ENV=\"production\" webpack-dashboard -t 'Production preview' -- webpack-dev-server",
