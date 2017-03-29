@@ -3,7 +3,7 @@ import * as React from "react";
 import ResponsiveImage from "../../components/ResponsiveImage";
 
 
-import "./Huge.scss";
+import "./PictureWall.scss";
 
 
 const images = [

@@ -19,14 +19,14 @@ class NavigationBar extends React.Component {
         if(this.props.intl.locale === language.locale) {
             return (
                 <li className="nav-item active" key={key}>
-                    <FormattedMessage id={`languages.${language.locale}`}/>
+                    {language.name}
                 </li>
             );
         } else {
             return (
                 <li className="nav-item" key={key}>
                     <a className="nav-link" onClick={() => this.changeLanguage(language)}>
-                        <FormattedMessage id={`languages.${language.locale}`}/>
+                        {language.name}
                     </a>
                 </li>
             );
@@ -49,24 +49,26 @@ class NavigationBar extends React.Component {
                     <span className="navbar-toggler-icon"/>
                 </button>
 
-                <a className="navbar-brand" href="#">Secured</a>
+                <a className="navbar-brand" href="#">
+                    <FormattedMessage id="navigation.secured"/>
+                </a>
 
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
                             <Link className="nav-link" to="home">
-                                Home
+                                <FormattedMessage id="navigation.home"/>
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="about">
-                                About
+                                <FormattedMessage id="navigation.about"/>
                             </Link>
                         </li>
                     </ul>
                     {this.renderLangSwitcher()}
                     <Link className="btn btn-success" to="/public" role="button">
-                        Logout
+                        <FormattedMessage id="navigation.logout"/>
                     </Link>
                 </div>
 

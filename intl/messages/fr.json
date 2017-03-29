@@ -1,6 +1,32 @@
 {
-  "languages" : {
-    "fr" : "Français",
-    "en" : "English"
+  "about" : {
+    "title" : "A propos..."
+  },
+  "home" : {
+    "title" : "Bienvenue !"
+  },
+  "login" : {
+    "title" : "Connexion",
+    "email" : "E-mail",
+    "password" : "Mot de passe",
+    "remember-me" : "Se souvenir de moi",
+    "sign-in" : "Se connecter"
+  },
+  "secured" : {
+    "about" : {
+      "title" : "A propos..."
+    },
+    "home" : {
+      "title" : "Welcome in a secured world !"
+    }
+  },
+  "navigation" : {
+    "public" : "Publique",
+    "secured" : "Sécurisé",
+    "home" : "Accueil",
+    "picture-wall" : "Images",
+    "about" : "A propos...",
+    "login" : "Connexion",
+    "logout" : "Déconnexion"
   }
 }

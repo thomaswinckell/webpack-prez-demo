@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
 
@@ -7,25 +8,31 @@ export default () => (
 
         <form className="form-signin">
 
-            <h2 className="form-signin-heading">Please sign in</h2>
+            <h2 className="form-signin-heading">
+                <FormattedMessage id="login.title"/>
+            </h2>
 
-            <label htmlFor="inputEmail" className="sr-only">Email address</label>
+            <label htmlFor="inputEmail" className="sr-only">
+                <FormattedMessage id="login.email"/>
+            </label>
 
-            <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus/>
+            <input type="email" id="inputEmail" className="form-control" required autoFocus/>
 
-            <label htmlFor="inputPassword" className="sr-only">Password</label>
+            <label htmlFor="inputPassword" className="sr-only">
+                <FormattedMessage id="login.password"/>
+            </label>
 
-            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required/>
+            <input type="password" id="inputPassword" className="form-control" required/>
 
             <div className="checkbox">
                 <label>
-                    <input type="checkbox" value="remember-me"/> Remember me
+                    <input type="checkbox" value="remember-me"/> <FormattedMessage id="login.remember-me"/>
                 </label>
             </div>
 
             <Link className="btn btn-lg btn-primary btn-block"
                   type="submit" to="/secured/home">
-                Sign in
+                <FormattedMessage id="login.sign-in"/>
             </Link>
 
         </form>

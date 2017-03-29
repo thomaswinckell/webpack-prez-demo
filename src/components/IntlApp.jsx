@@ -19,7 +19,7 @@ export default class IntlApp extends RefluxComponent {
     };
 
     static childContextTypes = {
-        availableLanguages: React.PropTypes.arrayOf(React.PropTypes.object)
+        availableLanguages : React.PropTypes.arrayOf(React.PropTypes.object)
     };
 
     state = {
@@ -28,7 +28,7 @@ export default class IntlApp extends RefluxComponent {
 
     getChildContext() {
         return {
-            availableLanguages: this.props.langs
+            availableLanguages : this.props.langs
         };
     }
 

@@ -4,12 +4,15 @@ export default {
 
         require.ensure([], () => {
 
+            const locale = "fr";
+            const name = "Français";
             const localeData = require('react-intl/locale-data/fr');
             const messages = require('./messages/fr.json');
             const formats = require('./formats/fr.json');
 
             resolve({
-                locale : "fr",
+                name,
+                locale,
                 localeData,
                 messages,
                 formats

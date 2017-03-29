@@ -1,10 +1,11 @@
 import * as React from "react";
+import { FormattedMessage } from "react-intl";
 
 
 export default () => (
     <div className="jumbotron">
         <h1 className="display-3">
-            About <strong>security</strong>
+            <FormattedMessage id="secured.about.title"/>
         </h1>
         <p className="lead">
             Cras justo odio, dapibus ac facilisis in, egestas eget quam.

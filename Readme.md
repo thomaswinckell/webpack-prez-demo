@@ -1,8 +1,6 @@
 TODO :
 
-- translations
 - prettify
-
 - configurable source map generation (sourceMap = true, debug = true)
 
 - show responsive images possibilities
