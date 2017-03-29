@@ -48,7 +48,7 @@ class NavigationBar extends React.Component {
                         <span className="navbar-toggler-icon"/>
                     </button>
 
-                    <Link className="navbar-brand" to="/secured">
+                    <Link className="navbar-brand" to="/secured/home">
                         <FormattedMessage id="navigation.secured"/>
                     </Link>
 
