@@ -1,6 +1,7 @@
 import * as React from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { NavLink } from "react-router-dom";
+import classNames from "classnames";
 import { autobind } from "core-decorators";
 
 import * as IntlActions from "../../actions/IntlActions";
@@ -19,21 +20,14 @@ class NavigationBar extends React.Component {
 
     @autobind
     renderLanguage(language, key) {
-        if(this.props.intl.locale === language.locale) {
-            return (
-                <li className="nav-item active" key={key}>
+        const className = classNames("nav-link", { "active" : language.locale === this.props.intl.locale });
+        return (
+            <li className="nav-item" key={key}>
+                <a className={ className } href="#" onClick={() => this.changeLanguage(language)}>
                     {language.name}
-                </li>
-            );
-        } else {
-            return (
-                <li className="nav-item" key={key}>
-                    <a className="nav-link" onClick={() => this.changeLanguage(language)}>
-                        {language.name}
-                    </a>
-                </li>
-            );
-        }
+                </a>
+            </li>
+        );
     }
 
     renderLangSwitcher() {
