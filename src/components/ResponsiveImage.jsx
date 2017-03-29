@@ -6,6 +6,8 @@ import "./ResponsiveImage.scss";
 
 export default class ResponsiveImage extends React.Component {
 
+    timeoutIds = [];
+
     state = {
         loaded : false,
         showImage : !this.props.delay || this.props.delay <= 0
@@ -13,8 +15,13 @@ export default class ResponsiveImage extends React.Component {
 
     componentWillMount() {
         if(this.props.delay > 0) {
-            setTimeout(() => this.setState({ showImage : true }), this.props.delay)
+            const timeoutId = setTimeout(() => this.setState({ showImage : true }), this.props.delay);
+            this.timeoutIds.push(timeoutId);
         }
+    }
+
+    componentWillUnmount() {
+        this.timeoutIds.forEach(t => clearInterval(t));
     }
 
     @autobind

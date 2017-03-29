@@ -1,17 +1,19 @@
 TODO :
 
-- path should be relative and not absolute (don't want to see /Users/winckell...)
-
-- lang switcher (dropdown)
 - translations
-- show responsive images possibilities
-- use color given to responsive image to put a background color and hide the data image before it's scaled
-- srcset-loader : width, blur and sigma query parameters parsing for placeholder
+- prettify
 
 - configurable source map generation (sourceMap = true, debug = true)
-- separate file for production and dev webpack configuration
 
-- prettify
+- show responsive images possibilities
+
+
+- use color given to responsive image to put a background color and hide the data image before it's scaled
+- srcset-loader : width, blur and sigma query parameters parsing for placeholder
+- bad path for srcset-loader
+
+- polyfills async loading
+
 - favicon
 
 - eslint

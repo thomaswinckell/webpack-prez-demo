@@ -3,14 +3,8 @@
 $size : 60px;
 $border-size : $size / 7;
 
-.spinner-wrapper {
-    position : relative;
-    height : 100%;
-    width : 100%;
-}
-
 .spinner {
-    position : absolute;
+    position : fixed;
     margin : auto;
     top : 0;
     bottom : 0;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IntlProvider } from "react-intl";
+import { IntlProvider, addLocaleData } from "react-intl";
 import { RefluxComponent } from "react-commons";
 
 import Spinner from "./Spinner";
@@ -19,7 +19,7 @@ export default class IntlApp extends RefluxComponent {
     };
 
     static childContextTypes = {
-        availableLanguages: React.PropTypes.arrayOf(React.PropTypes.func)
+        availableLanguages: React.PropTypes.arrayOf(React.PropTypes.object)
     };
 
     state = {
@@ -38,14 +38,35 @@ export default class IntlApp extends RefluxComponent {
     }
 
     setLang(lang) {
-        lang().then(currentLang => this.setState({currentLang}));
+        lang.provider().then(currentLang => {
+            addLocaleData(currentLang.localeData);
+            this.setState({currentLang})
+        });
+    }
+
+
+    /**
+     * React-intl accept only a flat object containing messages.
+     * Here, we flat messages putting a '.' between each object key.
+     * @param messages The messages not flatten
+     * @param prefix The prefix for the messages (internal use)
+     */
+    flatMessages(messages, prefix = "") {
+        return Object.keys(messages).map( key => {
+            const value = messages[key];
+            const id = `${prefix}${prefix.length > 0 ? '.' : ''}${key}`;
+            if(typeof value === 'string') {
+                return { [id] : value };
+            }
+            return this.flatMessages(value, id);
+        }).reduce((acc, curr) => Object.assign({}, acc, curr), {});
     }
 
     renderIntlProvider() {
         return (
             <IntlProvider
                 locale={this.state.currentLang.locale}
-                messages={this.state.currentLang.messages}
+                messages={this.flatMessages(this.state.currentLang.messages)}
                 formats={this.state.currentLang.formats}>
                 { this.props.children }
             </IntlProvider>
