@@ -1,6 +1,6 @@
 import * as React from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { autobind } from "core-decorators";
 
 import * as IntlActions from "../../actions/IntlActions";
@@ -54,9 +54,9 @@ class NavigationBar extends React.Component {
                         <span className="navbar-toggler-icon"/>
                     </button>
 
-                    <a className="navbar-brand" href="#">
+                    <Link className="navbar-brand" to="/secured">
                         <FormattedMessage id="navigation.secured"/>
-                    </a>
+                    </Link>
 
                     <div className="collapse navbar-collapse">
                         <ul className="navbar-nav mr-auto">

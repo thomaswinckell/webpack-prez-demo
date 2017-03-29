@@ -36,13 +36,12 @@ export default class ResponsiveImage extends React.Component {
 
         const firstSrcIndex =  Object.keys(this.props.sources)[0];
         const src = this.props.sources[this.props.defaultSize] || this.props.sources[this.props.defaultSize + "w"] || this.props.sources[firstSrcIndex];
-
         return (
             <img
                 ref={ c => { this.image = c } }
                 src={src}
                 sizes={this.props.sizes}
-                srcSet={this.props.srcset}
+                srcSet={this.props.srcSet}
                 className={classNames("responsive-image", { loaded : this.state.loaded })}
                 onLoad={this.loaded}/>
         )
