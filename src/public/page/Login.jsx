@@ -12,13 +12,13 @@ export default () => (
                 <FormattedMessage id="login.title"/>
             </h2>
 
-            <label htmlFor="inputEmail" className="sr-only">
+            <label htmlFor="inputEmail">
                 <FormattedMessage id="login.email"/>
             </label>
 
             <input type="email" id="inputEmail" className="form-control" required autoFocus/>
 
-            <label htmlFor="inputPassword" className="sr-only">
+            <label htmlFor="inputPassword">
                 <FormattedMessage id="login.password"/>
             </label>
 

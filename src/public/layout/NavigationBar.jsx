@@ -1,9 +1,11 @@
 import * as React from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { autobind } from "core-decorators";
 
 import * as IntlActions from "../../actions/IntlActions";
 
+import "./NavigationBar.scss";
 
 class NavigationBar extends React.Component {
 
@@ -15,6 +17,7 @@ class NavigationBar extends React.Component {
         IntlActions.setLanguage(language);
     }
 
+    @autobind
     renderLanguage(language, key) {
         if(this.props.intl.locale === language.locale) {
             return (
@@ -36,7 +39,7 @@ class NavigationBar extends React.Component {
     renderLangSwitcher() {
         return (
             <ul className="navbar-nav mr-auto">
-                { this.context.availableLanguages.map((l, key) => this.renderLanguage(l, key)) }
+                { this.context.availableLanguages.map(this.renderLanguage) }
             </ul>
         )
     }
@@ -45,40 +48,42 @@ class NavigationBar extends React.Component {
         return (
             <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
 
-                <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"/>
-                </button>
-
-                <a className="navbar-brand" href="#">
-                    <FormattedMessage id="navigation.public"/>
-                </a>
-
-                <div className="collapse navbar-collapse">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="home">
-                                <FormattedMessage id="navigation.home"/>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="picture-wall">
-                                <FormattedMessage id="navigation.picture-wall"/>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="about">
-                                <FormattedMessage id="navigation.about"/>
-                            </Link>
-                        </li>
-                    </ul>
-                    {this.renderLangSwitcher()}
-                    <Link className="btn btn-success" to="/public/login" role="button">
-                        <FormattedMessage id="navigation.login"/>
-                    </Link>
-                </div>
-
                 <div className="container">
-                    { this.props.children }
+
+                    <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"/>
+                    </button>
+
+                    <a className="navbar-brand" href="#">
+                        <FormattedMessage id="navigation.public"/>
+                    </a>
+
+                    <div className="collapse navbar-collapse">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/public/home">
+                                    <FormattedMessage id="navigation.home"/>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/public/picture-wall">
+                                    <FormattedMessage id="navigation.picture-wall"/>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/public/about">
+                                    <FormattedMessage id="navigation.about"/>
+                                </NavLink>
+                            </li>
+                        </ul>
+
+                        {this.renderLangSwitcher()}
+
+                        <NavLink className="btn btn-success" to="/public/login" role="button">
+                            <FormattedMessage id="navigation.login"/>
+                        </NavLink>
+                    </div>
+
                 </div>
             </nav>
         )
