@@ -1,7 +1,6 @@
 TODO :
 
 - configurable source map generation (sourceMap = true, debug = true)
-- message when show spinner : (loading this or that)
 
 - show responsive images possibilities
 

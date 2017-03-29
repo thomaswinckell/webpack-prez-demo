@@ -3,6 +3,17 @@
 $size : 60px;
 $border-size : $size / 7;
 
+.spinner-container h5 {
+    position: fixed;
+    margin: auto;
+    top: 5em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 9em;
+    height: 1em;
+}
+
 .spinner {
     position : fixed;
     margin : auto;
@@ -10,7 +21,6 @@ $border-size : $size / 7;
     bottom : 0;
     left : 0;
     right : 0;
-
     border: $border-size solid $gray-lighter;
     border-top: $border-size solid $brand-primary;
     border-radius: 50%;

@@ -6,11 +6,11 @@ import ResolveWithSpinner from "../utils/ResolveWithSpinner";
 
 
 
-const publicApp = ResolveWithSpinner(() => new Promise(resolve => {
+const publicApp = ResolveWithSpinner("Loading public app", () => new Promise(resolve => {
     require.ensure([], require => resolve(require('../public/Routes.jsx').default));
 }));
 
-const securedApp = ResolveWithSpinner(() => new Promise(resolve => {
+const securedApp = ResolveWithSpinner("Loading secured app", () => new Promise(resolve => {
     require.ensure([], require => resolve(require('../secured/Routes.jsx').default));
 }));
 

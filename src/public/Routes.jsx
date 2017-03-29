@@ -8,7 +8,7 @@ import Login from './page/Login';
 import ResolveWithSpinner from "../utils/ResolveWithSpinner";
 
 
-const pictureWallPage = ResolveWithSpinner(() => new Promise(resolve => {
+const pictureWallPage = ResolveWithSpinner("Loading pictures", () => new Promise(resolve => {
     require.ensure([], require => resolve(require('./page/PictureWall.jsx').default));
 }));
 

@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner";
 
 
 
-export default function(getComponent) {
+export default function(message, getComponent) {
 
     return class extends React.Component {
 
@@ -19,7 +19,7 @@ export default function(getComponent) {
         }
 
         render() {
-            return !this.state.component ? React.createElement(this.props.spinner) : React.createElement(this.state.component);
+            return !this.state.component ? React.createElement(this.props.spinner, { message }) : React.createElement(this.state.component);
         }
     }
 }

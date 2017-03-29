@@ -74,7 +74,7 @@ export default class IntlApp extends RefluxComponent {
     }
 
     renderLoader() {
-        return React.createElement(this.props.spinner);
+        return React.createElement(this.props.spinner, { message : "Loading translations" });
     }
 
     render() {
