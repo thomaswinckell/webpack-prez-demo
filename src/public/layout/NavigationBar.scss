@@ -16,7 +16,7 @@
 
     &.active, &:hover {
       background : white;
-      color : black;
+      color : black !important;
       transition : all 0.5s;
       border-radius : 5px;
     }
